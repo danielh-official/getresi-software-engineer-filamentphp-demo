@@ -1,0 +1,20 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/danielhaven/Library/Application Support/Herd/bin/php83",
+            "args": [
+                "/Volumes/CrucialX9ProForMac/Repos/danielh-official/laravel-12-template/example/artisan",
+                "boost:mcp"
+            ]
+        },
+        "herd": {
+            "command": "/Users/danielhaven/Library/Application Support/Herd/bin/php83",
+            "args": [
+                "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
+            ],
+            "env": {
+                "SITE_PATH": "/Volumes/CrucialX9ProForMac/Repos/danielh-official/laravel-12-template/example"
+            }
+        }
+    }
+}

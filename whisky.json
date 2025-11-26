@@ -1,0 +1,7 @@
+{
+    "disabled": [],
+    "hooks": {
+        "pre-commit": ["./vendor/bin/pint --dirty", "npx pretty-quick --staged"],
+        "pre-push": ["composer test"]
+    }
+}
