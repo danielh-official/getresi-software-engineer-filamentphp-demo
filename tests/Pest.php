@@ -11,9 +11,26 @@
 |
 */
 
+use Spatie\Permission\Models\Permission;
+
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Feature')
+    ->beforeEach(function () {
+        Permission::findOrCreate('access admin panel');
+        Permission::findOrCreate('view users');
+        Permission::findOrCreate('view a user');
+        Permission::findOrCreate('create users');
+        Permission::findOrCreate('update users');
+        Permission::findOrCreate('delete users');
+        Permission::findOrCreate('view properties');
+        Permission::findOrCreate('view a property');
+        Permission::findOrCreate('create properties');
+        Permission::findOrCreate('update properties');
+        Permission::findOrCreate('delete properties');
+        Permission::findOrCreate('restore properties');
+        Permission::findOrCreate('force delete properties');
+    });
 
 /*
 |--------------------------------------------------------------------------
