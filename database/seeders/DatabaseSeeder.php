@@ -16,20 +16,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ])->assignRole('super_admin');
+        if (User::whereEmail('test@example.com')->doesntExist()) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+            ])->assignRole('super_admin');
+        }
 
-        User::factory()->create([
-            'name' => 'Property Admin',
-            'email' => 'property@example.com',
-        ])->assignRole('property_admin');
+        if (User::whereEmail('property@example.com')->doesntExist()) {
+            User::factory()->create([
+                'name' => 'Property Admin',
+                'email' => 'property@example.com',
+            ])->assignRole('property_admin');
+        }
 
-        User::factory()->create([
-            'name' => 'User Admin',
-            'email' => 'user@example.com',
-        ])->assignRole('user_admin');
+        if (User::whereEmail('user@example.com')->doesntExist()) {
+            User::factory()->create([
+                'name' => 'User Admin',
+                'email' => 'user@example.com',
+            ])->assignRole('user_admin');
+        }
 
         Property::factory(50)->create();
     }
