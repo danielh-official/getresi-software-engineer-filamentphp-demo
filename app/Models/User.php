@@ -27,6 +27,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
         'phone',
         'full_address',
@@ -75,13 +76,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         );
     }
 
-    public function emailIsVerified(): bool
+    public function emailIsVerified(): Attribute
     {
-        return filled($this->email_verified_at);
+        return Attribute::make(
+            get: fn () => filled($this->email_verified_at),
+        );
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasPermissionTo('access admin panel');
+        return $this->hasPermissionTo('access admin panel') && $this->email_is_verified;
     }
 }
