@@ -16,6 +16,8 @@ class PropertySeeder extends Seeder
             throw new \Exception('PropertySeeder should not be run in production environment.');
         }
 
-        Property::factory(50)->create();
+        Property::factory(50)
+            ->sequence(fn ($sequence) => ['created_at' => now()->subDays(rand(0, 365))])
+            ->create();
     }
 }
