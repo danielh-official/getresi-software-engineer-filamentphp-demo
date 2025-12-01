@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         if (config('app.env') === 'production' || config('app.env') === 'development') {
-            throw new \Exception('UserSeeder should not be run in production environment.');
+            throw new \Exception('UserSeeder should not be run in production or development environment.');
         }
 
         if (User::whereEmail('test@example.com')->doesntExist()) {
