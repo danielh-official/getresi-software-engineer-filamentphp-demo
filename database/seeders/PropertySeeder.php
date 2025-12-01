@@ -12,6 +12,10 @@ class PropertySeeder extends Seeder
      */
     public function run(): void
     {
+        if (config('app.env') === 'production') {
+            throw new \Exception('PropertySeeder should not be run in production environment.');
+        }
+
         Property::factory(50)->create();
     }
 }
