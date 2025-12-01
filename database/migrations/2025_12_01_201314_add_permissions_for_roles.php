@@ -18,17 +18,11 @@ return new class extends Migration
             Permission::findOrCreate('create users'),
             Permission::findOrCreate('update users'),
             Permission::findOrCreate('delete users'),
-            Permission::findOrCreate('view properties'),
-            Permission::findOrCreate('view a property'),
-            Permission::findOrCreate('create properties'),
-            Permission::findOrCreate('update properties'),
-            Permission::findOrCreate('delete properties'),
-            Permission::findOrCreate('restore properties'),
-            Permission::findOrCreate('force delete properties'),
-        );
-
-        Role::findOrCreate('property_admin')->givePermissionTo(
-            Permission::findOrCreate('access admin panel'),
+            Permission::findOrCreate('view roles'),
+            Permission::findOrCreate('view a role'),
+            Permission::findOrCreate('create roles'),
+            Permission::findOrCreate('update roles'),
+            Permission::findOrCreate('delete roles'),
             Permission::findOrCreate('view properties'),
             Permission::findOrCreate('view a property'),
             Permission::findOrCreate('create properties'),
@@ -45,6 +39,10 @@ return new class extends Migration
             Permission::findOrCreate('create users'),
             Permission::findOrCreate('update users'),
             Permission::findOrCreate('delete users'),
+            Permission::findOrCreate('view roles'),
+            Permission::findOrCreate('view a role'),
+            Permission::findOrCreate('create roles'),
+            Permission::findOrCreate('update roles'),
         );
     }
 
@@ -53,22 +51,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Role::whereIn('name', ['super_admin', 'property_admin', 'user_admin'])->delete();
-
         Permission::whereIn('name', [
-            'access admin panel',
-            'view users',
-            'view a user',
-            'create users',
-            'update users',
-            'delete users',
-            'view properties',
-            'view a property',
-            'create properties',
-            'update properties',
-            'delete properties',
-            'restore properties',
-            'force delete properties',
+            'view roles',
+            'view a role',
+            'create roles',
+            'update roles',
+            'delete roles',
         ])->delete();
     }
 };
