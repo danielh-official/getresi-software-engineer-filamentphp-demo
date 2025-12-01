@@ -42,6 +42,10 @@ class UsersTable
                 TextColumn::make('zip_code')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('roles.name')
+                    ->label('Roles')
+                    ->separator(', ')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
