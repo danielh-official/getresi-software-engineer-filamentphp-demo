@@ -23,6 +23,9 @@ class RolesTable
                 TextColumn::make('permission_count')
                     ->state(fn (Role $record): int => $record->permissions->count())
                     ->sortable(),
+                TextColumn::make('users_count')
+                    ->state(fn (Role $record): int => $record->users->count())
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
