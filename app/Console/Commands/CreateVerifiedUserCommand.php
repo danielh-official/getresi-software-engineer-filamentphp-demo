@@ -6,21 +6,21 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class CreateUserCommand extends Command
+class CreateVerifiedUserCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:create-user-command {--name=} {--email=} {--password=} {--role=*}';
+    protected $signature = 'app:create-verified-user-command {--name=} {--email=} {--password=} {--role=*}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Creates a new user with option to assign roles.';
+    protected $description = 'Creates a new verified user with option to assign roles.';
 
     /**
      * Execute the console command.
@@ -43,6 +43,7 @@ class CreateUserCommand extends Command
                 'name' => $name,
                 'email' => $email,
                 'password' => bcrypt($password),
+                'email_verified_at' => now(),
             ]);
 
             $this->info("User {$user->name} created successfully with ID {$user->id}.");
