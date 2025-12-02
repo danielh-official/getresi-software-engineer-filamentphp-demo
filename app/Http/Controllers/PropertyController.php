@@ -16,8 +16,13 @@ class PropertyController extends Controller
      */
     public function index(Request $request)
     {
-        $request->query('per_page', 15);
-        $properties = Property::paginate($request->query('per_page', 15));
+        $perPage = $request->query('per_page', 15);
+        $page = $request->query('page', 1);
+
+        $properties = Property::paginate(
+            perPage: $perPage,
+            page: $page
+        );
 
         return response()->json($properties);
     }
@@ -29,7 +34,7 @@ class PropertyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'owner_email' => 'required|email|max:255',
+            'owner_email' => 'required|email|max:255|exists:users,email',
             'type' => ['required', Rule::enum(PropertyTypeEnum::class)],
         ]);
 
@@ -39,13 +44,13 @@ class PropertyController extends Controller
 
         $user = User::whereEmail($request->input('owner_email'))->firstOrFail();
 
-        $propery = Property::create([
+        $property = Property::create([
             'name' => $request->input('name'),
             'owner_id' => $user->id,
             'type' => $request->input('type'),
         ]);
 
-        return response()->json($propery, 201);
+        return response()->json($property, 201);
     }
 
     /**
