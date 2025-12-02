@@ -55,6 +55,7 @@ class PropertyRegistrationsChart extends ChartWidget
     protected function getPropertyCreationLineChartData(): array
     {
         $result = Property::whereYear('created_at', now()->year)
+            ->orderBy('created_at')
             ->get()
             ->groupBy(function ($property) {
                 return Carbon::parse($property->created_at)->format('Y-m');
