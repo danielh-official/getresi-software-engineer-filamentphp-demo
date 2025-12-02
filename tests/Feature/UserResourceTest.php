@@ -113,6 +113,7 @@ describe('authorization', function () {
             'name' => 'Different User',
             'email' => 'different@example.com',
             'password' => 'password',
+            'phone' => null,
         ])
             ->call('save')
             ->assertHasNoErrors();
