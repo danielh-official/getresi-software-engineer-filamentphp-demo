@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Policies\PersonalAccessTokenPolicy;
+use App\Policies\RolePolicy;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\PersonalAccessToken;
+use Spatie\Permission\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $column->placeholder('-');
         });
 
-        Gate::policy(\Spatie\Permission\Models\Role::class, \App\Policies\RolePolicy::class);
+        Gate::policy(Role::class, RolePolicy::class);
+        Gate::policy(PersonalAccessToken::class, PersonalAccessTokenPolicy::class);
     }
 }
