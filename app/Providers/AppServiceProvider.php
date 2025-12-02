@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\PermissionPolicy;
 use App\Policies\PersonalAccessTokenPolicy;
 use App\Policies\RolePolicy;
 use Filament\Infolists\Components\TextEntry;
@@ -9,6 +10,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\PersonalAccessToken;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::policy(Role::class, RolePolicy::class);
+        Gate::policy(Permission::class, PermissionPolicy::class);
         Gate::policy(PersonalAccessToken::class, PersonalAccessTokenPolicy::class);
     }
 }
