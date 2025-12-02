@@ -18,7 +18,7 @@ class ListPersonalAccessTokens extends ListRecords
     {
         return [
             CreateAction::make()
-                ->successNotification(null)
+                ->successNotificationTitle(null)
                 ->createAnother(false)
                 ->using(function (array $data): ?Model {
 
