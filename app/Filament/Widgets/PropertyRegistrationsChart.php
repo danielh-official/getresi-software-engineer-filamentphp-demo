@@ -9,6 +9,8 @@ use Illuminate\Support\Carbon;
 
 class PropertyRegistrationsChart extends ChartWidget
 {
+    protected ?string $pollingInterval = null;
+
     public function getHeading(): string|Htmlable|null
     {
         return 'Properties registered in '.now()->year;
