@@ -38,8 +38,6 @@ Run `composer update` to trigger `whisky update`. That should refresh your Git h
 
 ## REST API
 
-### Properties
-
 Login to an account with necessary personal access tokens permissions (super_admin role should have it). Create a personal access token and copy the result in the subsequent notification. The access token should be sent with the request as part of Bearer token authentication.
 
 In your client of choice (e.g., curl, Postman), you can call the following endpoints:
