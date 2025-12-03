@@ -16,26 +16,27 @@ it('can list properties', function () {
 
     User::factory()->hasProperties(30)->create();
 
-    $response = getJson(route('api.properties.index'));
-
-    $response->assertStatus(200)
+    $response = getJson(route('api.properties.index'))
+        ->assertStatus(200)
         ->assertJsonStructure([
-            'current_page',
             'data',
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'links',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
+            'links' => [
+                'first',
+                'last',
+                'prev',
+                'next',
+            ],
+            'meta' => [
+                'current_page',
+                'from',
+                'last_page',
+                'per_page',
+                'to',
+                'total',
+            ],
         ]);
 
-    expect($response->json('total'))->toBe(30);
+    expect($response->json('meta.total'))->toBe(30);
 });
 
 it('can control the list of properties via per_page query parameter', function () {
@@ -46,25 +47,8 @@ it('can control the list of properties via per_page query parameter', function (
 
     $response = getJson(route('api.properties.index', ['per_page' => 20]));
 
-    $response->assertStatus(200)
-        ->assertJsonStructure([
-            'current_page',
-            'data',
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'links',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
-        ]);
-
-    expect($response->json('per_page'))->toBe(20);
-    expect($response->json('total'))->toBe(50);
+    expect($response->json('meta.per_page'))->toBe(20);
+    expect($response->json('meta.total'))->toBe(50);
 });
 
 it('can control the list of properties via page query parameter', function () {
@@ -75,26 +59,9 @@ it('can control the list of properties via page query parameter', function () {
 
     $response = getJson(route('api.properties.index', ['per_page' => 15, 'page' => 2]));
 
-    $response->assertStatus(200)
-        ->assertJsonStructure([
-            'current_page',
-            'data',
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'links',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
-        ]);
-
-    expect($response->json('current_page'))->toBe(2);
-    expect($response->json('per_page'))->toBe(15);
-    expect($response->json('total'))->toBe(50);
+    expect($response->json('meta.current_page'))->toBe(2);
+    expect($response->json('meta.per_page'))->toBe(15);
+    expect($response->json('meta.total'))->toBe(50);
 });
 
 it('can store a property', function () {
@@ -102,13 +69,11 @@ it('can store a property', function () {
 
     Sanctum::actingAs($user);
 
-    $response = postJson(route('api.properties.store'), [
+    postJson(route('api.properties.store'), [
         'name' => 'Test Property',
         'owner_email' => $user->email,
         'type' => 'apartment',
-    ]);
-
-    $response->assertStatus(201)
+    ])->assertCreated()
         ->assertJsonFragment([
             'name' => 'Test Property',
             'owner_id' => $user->id,
@@ -154,6 +119,15 @@ it('can view a property', function () {
             'name' => 'Viewable Property',
             'owner_id' => $user->id,
             'type' => 'house',
+        ])
+        ->assertJsonStructure([
+            'data' => [
+                'id',
+                'name',
+                'type',
+                'owner_id',
+                'created_at',
+            ],
         ]);
 });
 
@@ -163,7 +137,7 @@ it('can delete a property', function () {
     Sanctum::actingAs($user);
 
     $property = $user->properties()->create([
-        'name' => 'Deletable Property',
+        'name' => 'Deletable Prpoperty',
         'type' => 'condo',
     ]);
 

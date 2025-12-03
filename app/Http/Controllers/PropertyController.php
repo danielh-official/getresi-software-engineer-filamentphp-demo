@@ -24,7 +24,7 @@ class PropertyController extends Controller
             page: $page
         );
 
-        return response()->json($properties);
+        return $properties->toResourceCollection();
     }
 
     /**
@@ -50,7 +50,7 @@ class PropertyController extends Controller
             'type' => $request->input('type'),
         ]);
 
-        return response()->json($property, 201);
+        return $property->toResource();
     }
 
     /**
@@ -58,7 +58,7 @@ class PropertyController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(Property::findOrFail($id));
+        return Property::findOrFail($id)->toResource();
     }
 
     /**
