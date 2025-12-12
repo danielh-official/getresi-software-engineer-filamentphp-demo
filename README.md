@@ -6,7 +6,13 @@ Current Live Site for Development: <https://getresi-filamentphp-demo-development
 
 ## Getting Started On Local
 
-1. Clone to your machine
+1. Fork and clone to your machine
+
+```bash
+git clone https://github.com/YOUR-USERNAME/getresi-software-engineer-filamentphp-demo.git
+cd getresi-software-engineer-filamentphp-demo
+```
+
 2. Run `composer setup` (see: <https://getcomposer.org/download/>)
 3. Running Server
     1. Run `./vendor/bin/sail up` or `./vendor/bin/sail up -d`
