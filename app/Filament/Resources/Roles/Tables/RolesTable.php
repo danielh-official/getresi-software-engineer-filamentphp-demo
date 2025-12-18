@@ -27,11 +27,11 @@ class RolesTable
                     ->state(fn (Role $record): int => $record->users->count())
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

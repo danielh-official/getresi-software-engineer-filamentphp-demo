@@ -16,9 +16,9 @@ class PersonalAccessTokensTable
         return $table
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime()->sortable(),
-                TextColumn::make('last_used_at')->dateTime()->sortable(),
-                TextColumn::make('expires_at')->dateTime()->sortable(),
+                TextColumn::make('created_at')->dateTime('M d, Y h:i A T')->sortable(),
+                TextColumn::make('last_used_at')->dateTime('M d, Y h:i A T')->sortable(),
+                TextColumn::make('expires_at')->dateTime('M d, Y h:i A T')->sortable(),
                 TextColumn::make('tokenable.email')->label('User')->sortable()->searchable(),
             ])
             ->filters([

@@ -36,6 +36,7 @@ class User extends Authenticatable implements FilamentUser /**, MustVerifyEmail*
         'city',
         'state',
         'zip_code',
+        'timezone',
     ];
 
     /**

@@ -69,9 +69,9 @@ class PropertyInfolist
                                     ]),
                                 Section::make('Timestamps')->schema([
                                     TextEntry::make('created_at')
-                                        ->dateTime(),
+                                        ->dateTime('M d, Y h:i A T'),
                                     TextEntry::make('updated_at')
-                                        ->dateTime(),
+                                        ->dateTime('M d, Y h:i A T'),
                                 ]),
                             ]),
                         Tab::make('Owner Information')

@@ -14,10 +14,10 @@ class RoleInfolist
                 TextEntry::make('name'),
                 TextEntry::make('guard_name'),
                 TextEntry::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->placeholder('-'),
             ]);
     }

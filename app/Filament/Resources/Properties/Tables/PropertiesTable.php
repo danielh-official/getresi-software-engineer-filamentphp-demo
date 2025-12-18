@@ -85,15 +85,15 @@ class PropertiesTable
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y h:i A T')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->visible(fn () => auth()->user()->can('delete properties')),

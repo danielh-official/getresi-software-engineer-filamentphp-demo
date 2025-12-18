@@ -30,10 +30,14 @@ class AppServiceProvider extends ServiceProvider
     {
         TextEntry::configureUsing(static function (TextEntry $field): void {
             $field->placeholder('-');
+
+            $field->timezone(auth()->user()->timezone ?? config('app.timezone'));
         });
 
         TextColumn::configureUsing(static function (TextColumn $column): void {
             $column->placeholder('-');
+
+            $column->timezone(auth()->user()->timezone ?? config('app.timezone'));
         });
 
         Gate::policy(Role::class, RolePolicy::class);
