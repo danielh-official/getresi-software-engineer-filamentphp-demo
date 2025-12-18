@@ -52,6 +52,15 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->profile(EditProfile::class);
+            ->profile(EditProfile::class)
+            ->colors([
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Indigo,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
+            ])
+            ->font('Roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
     }
 }
